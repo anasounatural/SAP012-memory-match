@@ -1,0 +1,43 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /*MUDAR QUANTIDADE DE COLUNAS*/
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+    *margin: 0 auto; /*Centraliza margens*/
+    background-color: black;
+    margin: 100px auto;
+    }
+
+.card{
+    aspect-ratio: 1/1; /* Responsividade: Faz a carta manter proporção de tamanho*/
+    width: 100%;
+    height: 200%;
+    background-color: #ffa50d; /* OJO! PEGAR REFERÊNCIA*/
+    position: relative;
+    transition: all 400ms ease/*aplica transição para todas as propriedades*/
+    transform-style: preserve-3d; /*Aplica efeito 3d*/
+}
+
+.face{
+    width: 100%;
+    height:100%;
+    position: absolute; /*os 2 cards ficam sobre o outro. Ocupam todo mesmo espaço*/
+    background-size: cover; /*TESTAR*/
+    background-position: center;
+}
+
+.front{
+    background-image: url('https://simpleicons.org/icons/vue-dot-js.svg');
+    transform: rotateY(180deg); /*Para na rotação não ficar o lado espelhado*/
+    
+}
+
+.back{
+    background-color: #F7DF1E
+    backface-visibility: hidden; /*TESTAR: para mostrar somente o verso ao virar  */
+}
+
+.card:hover {
+    transform: rotateY(180deg);
+}
