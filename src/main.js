@@ -1,3 +1,5 @@
 import App from './components/App.js';
 
-document.getElementById('root').appendChild(App(webdev));
+/* document.querySelector(".grid").appendChild(App()); */
+
+App(); 

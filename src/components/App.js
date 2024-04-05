@@ -1,10 +1,13 @@
 
 
-import webdev from '../data/webdev/webdev.js';
-
+import tematicas from '../data/webdev/webdev.js';
+const App= () => {
+loadGame()
+}
+export default App;
 const grid = document.querySelector('.grid');
 
-const tematicas = [
+/* const tematicas = [
 'js',
 'git',
 'css',
@@ -16,9 +19,10 @@ const tematicas = [
 'angular',
 'vue',
 ];
+*/
 
 /* CRIA O ELEMENTO */
-const createElemet = (tag, className) => {
+const createElement = (tag, className) => {
     const element = document.createElement(tag);
     element.className = className;
     return element;
@@ -30,7 +34,7 @@ let segundaCarta = '';
 
 //CHECA SE VIROU TODAS AS CARTAS
 const virouTodas = () => {
-    const disabledCards = document.querrySelectorAll('.disabled-card'); // cria array que mostra que todas as cartas foram viradas/desabiilitadas 
+    const disabledCards = document.querySelectorAll('.disabled-card'); // cria array que mostra que todas as cartas foram viradas/desabiilitadas 
     if (disabledCards.lenght === 20) {
         alert('Parabéns, você conseguiu!');
     }
@@ -42,8 +46,8 @@ const checarCartas = ( ) => {
     const segundoTema = segundaCarta.getAttribute('data-tema');
 
     if (primeiroTema === segundoTema){
-        primeiraCarta.firstChild.classList.add('disabled-card');
-        segundaCarta.firstChild.classList.add('disabled-card');
+        primeiraCarta.classList.add('disabled-card'); // primeiraCarta.firstChild.classList.add('disabled-card');
+        segundaCarta.classList.add('disabled-card');
         primeiraCarta = ''; 
         segundaCarta = '';
 
@@ -61,17 +65,18 @@ const checarCartas = ( ) => {
 }
 
 //VIRA A CARTA
-const virarCarta = ((target)) => {
-    if(target.parentNode.className.includes('reveal-card')) {
+const virarCarta = (event) => {
+    console.log(event.target)
+    if(event.target.className.includes('reveal-card')) {
         return;
-    }
+    } //
 
 if(primeiraCarta ===''){  //verifica se a carta clicada está vazia, logo é a primeira
-    target.parentNode.classList.add('reveal-card'); //revela a carta, se estiver vazia. Se naõ estiver vazia, cai no else
-    primeiraCarta = target.parentNode; //guarda a carta na variavel firstCard
+    event.target.classList.add('reveal-card'); //revela a carta, se estiver vazia. Se naõ estiver vazia, cai no else
+    primeiraCarta = event.target; //guarda a carta na variavel firstCard
 }else if (segundaCarta === ''){
-    target.parentNode.classList.add('reveal-card');
-    segundaCarta = target.parentNode;
+    event.target.classList.add('reveal-card');
+    segundaCarta = event.target;
 
     checarCartas();
 }
@@ -85,29 +90,29 @@ if(primeiraCarta ===''){  //verifica se a carta clicada está vazia, logo é a p
 
 //CRIANDO AS CARTAS
 const createCard = (tema) => {
-    const card = createElemet('div', 'card'); //criar tag div e adiciona classe card 
-    const front = createElemet('div', 'face front');
-    const back= createElemet('div', 'face back');
+    const card = createElement('div', 'card'); //criar tag div e adiciona classe card 
+    const front = createElement('div', 'face front');
+    const back= createElement('div', 'face back');
 
     card.appendChild(front); //coloca a div front dentro da div card
     card.appendChild(back);
 
-    front.style.backgroundImage = 'url('../webdev/${character}.png')'; // adiciona  a imagem da frente da carta de forma dinâmica
+    front.style.backgroundImage = `url('${tema.image}')`; // adiciona  a imagem da frente da carta de forma dinâmica. Nao precisa add caminho pq é um link externo
 
     card.addEventListener ('click', virarCarta); //virar a carta
-    card.setAttribute('data-tematica', tema) //setAtibute, adiciona o atributo. Data- cria atributos, como data-tematica. tema é o valor do atributo. Objetivo = montar função que permita comparar as duas cartas
+    card.setAttribute('data-tematica', tema.id) //setAtibute, adiciona o atributo. Data- cria atributos, como data-tematica. tema é o valor do atributo. Objetivo = montar função que permita comparar as duas cartas
 
     return card;
 }
 
 //CARREGAR JOGO / DUPLICA CARTAS / EMBARALHA
 const loadGame = () => {  
-    const duplicarTematicas = [ ...tematicas, ...tematicas ] //duplica cartas
+    const duplicarTematicas = [ ...tematicas.items, ...tematicas.items ] //duplica cartas spread (...) faz com que ao invés de imprimir a lista, imprima cada elemento da lista
 
     const embaralhar = duplicarTematicas.sort(() => Math.random() - 0.5);
 
     embaralhar.forEach((tema) => {
-    const card = createCard();//cria cada carta, pagando cada umas das temáticas 29:50
+    const card = createCard(tema);//cria cada carta, pagando cada umas das temáticas 29:50
     grid.appendChild(card); //adiciona uma carta a grade
 
     });
