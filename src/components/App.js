@@ -2,10 +2,10 @@
 
 import tematicas from '../data/webdev/webdev.js';
 const App = () => {
-    loadGame()
+  return loadGame()
 }
 export default App;
-const grid = document.querySelector('.grid');
+
 
 /* const tematicas = [
 'js',
@@ -111,12 +111,14 @@ const createCard = (tema) => {
 
 //CARREGAR JOGO / DUPLICA CARTAS / EMBARALHA
 const loadGame = () => {
+    const grid = createElementWithClass('div', 'grid');
     const duplicarTematicas = [...tematicas.items, ...tematicas.items] //duplica cartas spread (...) faz com que ao invés de imprimir a lista, imprima cada elemento da lista
     const embaralhar = duplicarTematicas.sort(() => Math.random() - 0.5);
     embaralhar.forEach((tema) => {
         const card = createCard(tema);//Durante o Load, cria de fato a carta baseado na formula const CrateCard com cada tema
         grid.appendChild(card); //adiciona uma carta a grade
     });
+    return grid
 }
 
 //criei contante loadGame const card, "grid", forEach, inicialmente com só 1 serie te tematicas
