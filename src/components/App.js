@@ -59,7 +59,7 @@ const checarCartas = () => {
             primeiraCarta.classList.remove('reveal-card'); //remove a classe de revelar as cartas para ela virar de fundo
             segundaCarta.classList.remove('reveal-card');
 
-            primeiraCarta = ''; //reatribui como vazio, ou impede de virarmos outra, já que antes atribuimos que só se vira alguma carta se ela ainda esta vazia
+            primeiraCarta = ''; //reatribui como vazio, ou impede de virarmos outra, já que antes atribuimos que sónpm run depl se vira alguma carta se ela ainda esta vazia
             segundaCarta = '';
         }, 500); //setTimeout adiciona tema para carta ficar virada de frente ou ela desvira antes de escolher outra
     }
@@ -69,7 +69,7 @@ const checarCartas = () => {
 
 //VIRA A CARTAs
 const virarCarta = (event) => {
-    const cartaEscolhida = event.target // terget foca no alvo que sofrerá o evento
+    const cartaEscolhida = event.target // target foca no alvo que sofrerá o evento
     if (cartaEscolhida.className.includes('reveal-card') || cartaEscolhida.className.includes('front')) {
         return; //se a revel-card for ativado na carta de fundo(pq está vinculado só a de fundo) ou se estiver aparecendo a carta de frente, não fazer nada. 
     }
